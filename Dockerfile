@@ -8,7 +8,7 @@
 # =============================================================================
 
 # Base image: Python 3.9 slim (küçük boyut)
-FROM python:3.9-slim as base
+FROM python:3.9-slim AS base
 
 # Metadata
 LABEL maintainer="ML Team"
@@ -27,7 +27,7 @@ WORKDIR /app
 # =============================================================================
 # BUILD STAGE: Dependencies
 # =============================================================================
-FROM base as builder
+FROM base AS builder
 
 # System dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -52,7 +52,7 @@ RUN python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); 
 # =============================================================================
 # PRODUCTION STAGE
 # =============================================================================
-FROM base as production
+FROM base AS production
 
 # Copy virtual environment from builder
 COPY --from=builder /opt/venv /opt/venv
@@ -65,6 +65,7 @@ COPY --from=builder /root/nltk_data /root/nltk_data
 COPY src/ ./src/
 COPY api/ ./api/
 COPY configs/ ./configs/
+COPY monitoring/ ./monitoring/
 
 # Create directories
 RUN mkdir -p logs checkpoints data
@@ -87,7 +88,7 @@ CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
 # =============================================================================
 # DEVELOPMENT STAGE
 # =============================================================================
-FROM production as development
+FROM production AS development
 
 # Switch to root for dev tools installation
 USER root
@@ -100,6 +101,9 @@ RUN pip install \
     flake8 \
     ipython \
     jupyter
+
+# Copy test files
+COPY tests/ ./tests/
 
 # Switch back to appuser
 USER appuser

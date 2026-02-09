@@ -39,7 +39,8 @@ logs/
 
 # Data (large files - GitHub limit 100MB)
 *.csv
-data/
+*.db
+data/raw/
 
 # Environment variables
 .env

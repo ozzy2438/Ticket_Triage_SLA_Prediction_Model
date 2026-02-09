@@ -1,0 +1,54 @@
+# =============================================================================
+# Ticket Triage System - Application Configuration
+# =============================================================================
+# All hardcoded values extracted here for easy tuning.
+# Change thresholds, model params, and API settings without touching code.
+# =============================================================================
+
+model:
+  # Architecture (must match trained model)
+  input_dim: 772              # BERT (768) + temporal (4)
+  hidden_dims: [512, 256, 128]
+  num_classes: 20
+  dropout: 0.3
+  artifact_name: "ticket_triage_model.pth"
+  version: "1.0.0"
+
+  # BERT embedding settings
+  bert_model: "distilbert-base-uncased"
+  max_token_length: 512
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["*"]        # Restrict in production: ["https://app.example.com"]
+  max_batch_size: 100
+
+# Human-in-the-Loop decision thresholds
+hitl:
+  auto_route_threshold: 0.85   # >= 0.85 -> auto-route
+  human_review_threshold: 0.70 # >= 0.70 -> human review
+  # < 0.70 -> escalate
+
+# Monitoring & drift detection
+monitoring:
+  confidence_drift_threshold: 0.75
+  escalation_rate_threshold: 0.30
+  accuracy_drift_threshold: 0.85
+  processing_time_window: 1000  # Keep last N processing times
+
+# Business metrics assumptions
+business:
+  hourly_rate: 30             # $/hour for manual review
+  auto_route_time_saved_min: 15
+  human_review_time_saved_min: 10
+
+# Database
+database:
+  path: "data/ticket_triage.db"
+
+# Model artifact search paths (tried in order)
+checkpoint_dirs:
+  - "models"
+  - "checkpoints"
+  - "../models"

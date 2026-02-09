@@ -1,0 +1,13 @@
+# Grafana dashboard provisioning config
+apiVersion: 1
+
+providers:
+  - name: "Ticket Triage"
+    orgId: 1
+    folder: "Ticket Triage"
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: false
