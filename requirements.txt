@@ -1,0 +1,112 @@
+# =============================================================================
+# Ticket Triage + SLA Prediction - Requirements
+# =============================================================================
+# Her kütüphanenin ne işe yaradığını açıklıyoruz (ML ders niteliğinde)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# TEMEL VERİ İŞLEME
+# -----------------------------------------------------------------------------
+# pandas: Excel'in süper güçlü hali - tablolarla çalışmak için
+# numpy: Matematiksel işlemler - vektörler, matrisler
+pandas>=2.0.0
+numpy>=1.24.0
+
+# -----------------------------------------------------------------------------
+# MAKİNE ÖĞRENMESİ ÇERÇEVELERİ
+# -----------------------------------------------------------------------------
+# scikit-learn: Klasik ML algoritmaları (karar ağaçları, SVM, metrikler)
+# torch: Derin öğrenme için - sinir ağları oluşturuyoruz
+scikit-learn>=1.3.0
+torch>=2.0.0
+
+# -----------------------------------------------------------------------------
+# DOĞAL DİL İŞLEME (NLP)
+# -----------------------------------------------------------------------------
+# transformers: Hugging Face - modern dil modelleri (BERT, GPT benzeri)
+# sentence-transformers: Cümleleri vektörlere çevirmek için
+# nltk: Klasik NLP araçları (tokenization, stemming)
+# spacy: Endüstriyel güçte NLP (Named Entity Recognition vb.)
+transformers>=4.35.0
+sentence-transformers>=2.2.0
+nltk>=3.8.0
+spacy>=3.7.0
+
+# -----------------------------------------------------------------------------
+# GÖRSELLEŞTİRME
+# -----------------------------------------------------------------------------
+# matplotlib: Temel grafikler - grafik kağıdı gibi
+# seaborn: Güzel istatistiksel grafikler - renkli kalemler
+# plotly: İnteraktif grafikler - dokunmatik ekran gibi
+# wordcloud: Kelime bulutu oluşturmak için
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.18.0
+wordcloud>=1.9.0
+
+# -----------------------------------------------------------------------------
+# API VE WEB SERVİSİ
+# -----------------------------------------------------------------------------
+# fastapi: Modern, hızlı API framework - REST API oluşturmak için
+# uvicorn: ASGI server - FastAPI'yi çalıştırmak için
+# pydantic: Veri doğrulama - gelen verilerin doğru formatta olduğunu kontrol
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.5.0
+
+# -----------------------------------------------------------------------------
+# MODEL TAKİBİ VE DENEY YÖNETİMİ
+# -----------------------------------------------------------------------------
+# mlflow: Model versiyonlama, deney takibi - her denemeyi kaydediyoruz
+# wandb: Weights & Biases - eğitim görselleştirme (alternatif)
+mlflow>=2.9.0
+wandb>=0.16.0
+
+# -----------------------------------------------------------------------------
+# KONFİGÜRASYON YÖNETİMİ
+# -----------------------------------------------------------------------------
+# pyyaml: YAML dosyalarını okumak için - ayarları düzenli tutuyoruz
+# python-dotenv: .env dosyalarından gizli bilgileri okumak için
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# -----------------------------------------------------------------------------
+# VERİ DOĞRULAMA VE MONİTORİNG
+# -----------------------------------------------------------------------------
+# evidently: ML model monitoring - drift algılama
+# great-expectations: Veri kalite kontrolü
+evidently>=0.4.0
+
+# -----------------------------------------------------------------------------
+# NOTEBOOK VE GELİŞTİRME
+# -----------------------------------------------------------------------------
+# jupyter: İnteraktif geliştirme ortamı
+# tqdm: Progress bar - uzun işlemlerde ilerlemeyi görmek için
+# joblib: Model kaydetme ve paralel işlem
+jupyter>=1.0.0
+tqdm>=4.66.0
+joblib>=1.3.0
+
+# -----------------------------------------------------------------------------
+# TEST VE KALİTE
+# -----------------------------------------------------------------------------
+# pytest: Test framework - kodun doğru çalıştığını kontrol
+# black: Kod formatlama - tutarlı kod stili
+# flake8: Kod linting - hataları önceden yakala
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.1.0
+
+# -----------------------------------------------------------------------------
+# HTTP İSTEKLERİ
+# -----------------------------------------------------------------------------
+# requests: API'lerden veri çekmek için
+# httpx: Async HTTP client - FastAPI testleri için
+requests>=2.31.0
+httpx>=0.25.0
+
+# -----------------------------------------------------------------------------
+# SURVIVAL ANALYSIS (SLA için opsiyonel)
+# -----------------------------------------------------------------------------
+# lifelines: Survival analysis - "ne zaman olacak?" tahminleri
+lifelines>=0.27.0

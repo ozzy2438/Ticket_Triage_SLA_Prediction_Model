@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+/tmp/
+
+# Model artifacts (optional - uncomment if you don't want to commit models)
+# models/*.pth
+# models/*.pkl
+
+# Data (large files - GitHub limit 100MB)
+*.csv
+data/
+
+# Environment variables
+.env
+.env.local

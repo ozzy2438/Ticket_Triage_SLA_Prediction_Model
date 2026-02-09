@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # Main API Service
+  ticket-triage-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: ticket-triage-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./checkpoints:/app/checkpoints:ro  # Model artifacts (read-only)
+      - ./logs:/app/logs  # Application logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODEL_PATH=/app/checkpoints
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ticket-triage-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+
+  # Optional: Prometheus monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - ticket-triage-network
+    profiles:
+      - monitoring
+
+  # Optional: Grafana dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - ticket-triage-network
+    profiles:
+      - monitoring
+
+networks:
+  ticket-triage-network:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:
